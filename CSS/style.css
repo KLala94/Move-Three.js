@@ -1,0 +1,11 @@
+#Forward{
+background-color: red;
+position: absolute;
+bottom: 70px;
+
+}
+#Left {
+  background-color: blue;
+  position: absolute;
+bottom: 2px;
+}

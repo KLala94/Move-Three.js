@@ -146,12 +146,12 @@ function update(renderer, scene,camera, controls, Machine, Metal, moveObjectfw){
       var value= FW2.value;
       console.log(value);
       if(startMoving){
-          if(Math.abs(Machine.object.position.x - value) >= 0.01 ){
+          if(Math.abs(Machine.object.position.x - value) >= 0.02 ){
               if (value > Machine.object.position.x){
-                  Machine.object.position.x += 0.07;
+                  Machine.object.position.x += 0.02;
 
               } else {
-                  Machine.object.position.x -= 0.07;
+                  Machine.object.position.x -= 0.02;
 
               }
           } else {
@@ -165,12 +165,12 @@ LF2 = document.getElementById('LF');
 var value= LF2.value;
 console.log(value);
 if(startMovingY){
-    if(Math.abs(Machine.object.position.y - value) >= 0.01 ){
+    if(Math.abs(Machine.object.position.y - value) >= 0.02 ){
         if (value > Machine.object.position.y){
-            Machine.object.position.y += 0.07;
+            Machine.object.position.y += 0.02;
 
         } else {
-            Machine.object.position.y -= 0.07;
+            Machine.object.position.y -= 0.02;
 
         }
     } else {
