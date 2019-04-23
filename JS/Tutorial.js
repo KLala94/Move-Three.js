@@ -1,10 +1,13 @@
 // Define Constants
 var moveObject    = false;
-var startMoving   = false;
+var startMovingY   = false;
+
+var startMoving  = false;
+document.getElementById("FW2").disabled=false;
 document.getElementById("FW").disabled=false;
-document.getElementById("BW").disabled=false;
+document.getElementById("LF2").disabled=false;
 document.getElementById("LF").disabled=false;
-document.getElementById("RG").disabled =false;
+
 // Define Machine
 var Machine = {
     name: 'Machine',
@@ -52,16 +55,16 @@ function init() {
     // console.log(Machine);
 
     // Object control
-    var folder3 = gui.addFolder('position');
-    gui.add(Metal.object.position, 'x', -20,20);
-    gui.add(Metal.object.position, 'y', -20,20);
-    gui.add(Metal.object.position, 'z', -20,20);
-    folder3.open();
-    var folder4 = gui.addFolder('scale');
-    gui.add(Metal.object.scale, 'x', 0,5);
-    gui.add(Metal.object.scale, 'y', 0,5);
-    gui.add(Metal.object.scale, 'z', 0,5);
-    folder4.open();
+    // var folder3 = gui.addFolder('position');
+    // gui.add(Metal.object.position, 'x', -20,20);
+    // gui.add(Metal.object.position, 'y', -20,20);
+    // gui.add(Metal.object.position, 'z', -20,20);
+    // folder3.open();
+    // var folder4 = gui.addFolder('scale');
+    // gui.add(Metal.object.scale, 'x', 0,5);
+    // gui.add(Metal.object.scale, 'y', 0,5);
+    // gui.add(Metal.object.scale, 'z', 0,5);
+    // folder4.open();
 
     //start lights_____________________________________________________________
     // light one
@@ -137,15 +140,50 @@ function init() {
 function update(renderer, scene,camera, controls, Machine, Metal, moveObjectfw){
     renderer.render(scene, camera);
 
-    if (moveObjectfw){
-        for (i = 0;   i < 100; i++) {
-        Machine.object.position.x += 0.01
-      };
-    };
 
+      function moveToPos() {
+      FW2 = document.getElementById('FW');
+      var value= FW2.value;
+      console.log(value);
+      if(startMoving){
+          if(Math.abs(Machine.object.position.x - value) >= 0.01 ){
+              if (value > Machine.object.position.x){
+                  Machine.object.position.x += 0.07;
+
+              } else {
+                  Machine.object.position.x -= 0.07;
+
+              }
+          } else {
+              startMoving = false;
+          }
+      }
+
+}
+function moveToPosY() {
+LF2 = document.getElementById('LF');
+var value= LF2.value;
+console.log(value);
+if(startMovingY){
+    if(Math.abs(Machine.object.position.y - value) >= 0.01 ){
+        if (value > Machine.object.position.y){
+            Machine.object.position.y += 0.07;
+
+        } else {
+            Machine.object.position.y -= 0.07;
+
+        }
+    } else {
+        startMovingY = false;
+    }
+}
+
+}
     scene.traverse(function(chld){
 
     });
+    moveToPos();
+    moveToPosY();
             requestAnimationFrame(function(){
             update(renderer,scene,camera, controls, Machine, Metal);
         });
@@ -166,8 +204,12 @@ function movelf(){
 function moverg(){
     moveObjectrg = true;
 }
+function moveToPos(){
+    startMoving = true;
+}
+function moveToPosY(){
+    startMovingY = true;
+}
 init();
-movefw();
-movebw();
-movelf();
-moverg();
+moveToPos();
+moveToPosY();

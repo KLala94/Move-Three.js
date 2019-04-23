@@ -18,11 +18,15 @@
                   <div class="col-4">
                       <script type="text/javascript">
                       </script>
-                      <button id="FW" type="button" class="btn btn-primary" onclick="movefw()" >Forward</button>
-                      <button id="LF" type="button" class="btn btn-primary" onclick="movelf()" >Left</button>
-                      <button id="RG" type="button" class="btn btn-primary" onclick="moverg()" >Right</button>
-                      <button id="BW" type="button" class="btn btn-primary" onclick="movebw()" >Backward</button>
-                  </div>
+                      <form>
+                                <input type="text" name="enter" class="enter" value="" id="FW"/>
+                                <input type="button" value="Move to Position" onclick="moveToPos()" id="FW2"/>
+                      </form>
+                      <form>
+                                <input type="text" name="enter" class="enter" value="" id="LF"/>
+                                <input type="button" value="Move to Position" onclick="moveToPosY()" id="LF2"/>
+                      </form>
+                      </div>
 
 
                 </div>
