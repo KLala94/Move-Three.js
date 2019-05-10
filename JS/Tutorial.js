@@ -1,12 +1,13 @@
 // Define Constants
 var moveObject    = false;
 var startMovingY   = false;
-
+var $Mcolor = 0x888888;
 var startMoving  = false;
 document.getElementById("FW2").disabled=false;
 document.getElementById("FW").disabled=false;
 document.getElementById("LF2").disabled=false;
 document.getElementById("LF").disabled=false;
+document.getElementById("M").disabled=false;
 
 // Define Machine
 var Machine = {
@@ -14,7 +15,7 @@ var Machine = {
     position: {x: 0, y: 0, z: 0},
     scale:    {w: 1, l: 0.8, h: 0.8},
     size:     {w: 1, l: 0.8, h: 0.8},
-color: 0x888888,
+color: $Mcolor,
     addObject: function(){
          geometry = new THREE.SphereGeometry(this.size.w, this.size.h, this.size.d);
          material = new THREE.MeshPhongMaterial({color: this.color, transparent: true });
@@ -26,6 +27,10 @@ color: 0x888888,
         this.object  = mesh;
     }
 };
+$Mcolor = 0x888888;
+function RED(){
+$Mcolor = 0xffff88};
+
 
 // Define Metal
 var Metal = {
@@ -45,6 +50,26 @@ var Metal = {
 };
 
 
+// instantiate a loader
+var loader = new THREE.TextureLoader();
+loader.crossOrigin = true;
+// load a resource
+loader.load(
+    // resource URL
+    '/home/mint/Public/Bomb Game/Bomb Game/chess_board.jpg',
+    // Function when resource is loaded
+    function ( texture ) {
+        // do something with the texture
+        material.map = texture;
+        material.needsUpdate = true;
+    },
+);
+// --------Plane ---------
+var texture = new THREE.TextureLoader().load( '/home/mint/Public/Bomb Game/Bomb Game/chess_board.jpg' );
+
+var geometry = new THREE.PlaneGeometry(20, 20);
+var material = new THREE.MeshPhongMaterial({map: texture, color: 0xFFFFFF})
+var plane = new THREE.Mesh(geometry, material);
 // Initialize function
 function init() {
     var scene   = new THREE.Scene();
@@ -70,7 +95,7 @@ function init() {
     // light one
     var spotLight = new THREE.SpotLight( 0xffffff );
     var spotLight = getSpotLight(1);
-    spotLight.position.set( 1, 1, 1 );
+    spotLight.position.set( 4, 3, 2 );
     spotLight.position.y = 4;
     spotLight.intensity  = 2;
     spotLight.castShadow  = true;
@@ -115,6 +140,7 @@ function init() {
     // Add items to the scene
     scene.add(Metal.object);
     scene.add(Machine.object);
+    scene.add(plane);
     scene.add(spotLight);
     scene.add(spotLight2);
 
@@ -192,18 +218,6 @@ function render(){
     renderer.render(scene, camera);
 }
 
-function movefw(){
-    moveObjectfw = true;
-}
-function movebw(){
-    moveObjectbw = true;
-}
-function movelf(){
-    moveObjectlf = true;
-}
-function moverg(){
-    moveObjectrg = true;
-}
 function moveToPos(){
     startMoving = true;
 }
@@ -213,3 +227,7 @@ function moveToPosY(){
 init();
 moveToPos();
 moveToPosY();
+RED();
+function M(){
+ Machine.object.position.x += 2;
+}
