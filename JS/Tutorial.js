@@ -1,7 +1,7 @@
 // Define Constants
 var moveObject    = false;
 var startMovingY   = false;
-var $Mcolor = 0x888888;
+
 var startMoving  = false;
 document.getElementById("FW2").disabled=false;
 document.getElementById("FW").disabled=false;
@@ -15,7 +15,7 @@ var Machine = {
     position: {x: 0, y: 0, z: 0},
     scale:    {w: 1, l: 0.8, h: 0.8},
     size:     {w: 1, l: 0.8, h: 0.8},
-color: $Mcolor,
+color: 0x888888,
     addObject: function(){
          geometry = new THREE.SphereGeometry(this.size.w, this.size.h, this.size.d);
          material = new THREE.MeshPhongMaterial({color: this.color, transparent: true });
@@ -26,10 +26,9 @@ color: $Mcolor,
         mesh.scale.x = this.size.w;
         this.object  = mesh;
     }
+  
 };
-$Mcolor = 0x888888;
-function RED(){
-$Mcolor = 0xffff88};
+
 
 
 // Define Metal
@@ -144,7 +143,7 @@ function init() {
     scene.add(spotLight);
     scene.add(spotLight2);
 
-
+   
     // renderer here
     var renderer = new THREE.WebGLRenderer();
     renderer.shadowMap.enabled = true;
@@ -170,7 +169,7 @@ function update(renderer, scene,camera, controls, Machine, Metal, moveObjectfw){
       function moveToPos() {
       FW2 = document.getElementById('FW');
       var value= FW2.value;
-      console.log(value);
+    //   console.log(value);
       if(startMoving){
           if(Math.abs(Machine.object.position.x - value) >= 0.02 ){
               if (value > Machine.object.position.x){
@@ -189,7 +188,7 @@ function update(renderer, scene,camera, controls, Machine, Metal, moveObjectfw){
 function moveToPosY() {
 LF2 = document.getElementById('LF');
 var value= LF2.value;
-console.log(value);
+// console.log(value);
 if(startMovingY){
     if(Math.abs(Machine.object.position.y - value) >= 0.02 ){
         if (value > Machine.object.position.y){
